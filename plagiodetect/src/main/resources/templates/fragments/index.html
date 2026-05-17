@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="componente(fragmento)">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drunk July </title>
+    <link rel="icon" th:href="@{img/GgCopy.ico}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar navbarra">
+            <div class="container-fluid">
+                <div class="row row-head w-100 ">
+
+                    <div class="col-8 d-flex logo-nav ">
+                        <a class="" href="#">
+                            <div class="ps-4 d-flex gap-1 align-items-center">
+
+                                <img src="/img/duplicate .png" alt="logo" height="30">
+                                <strong>Drunk July</strong>
+                        </a>
+                    </div>
+
+
+                    <div class="menu-central">
+                        <ul class="nav justify-content-center">
+                            <li class="nav-item"> <a class="nav-link xd" href="#analisis">Análisis de plagio</a>
+                            </li>
+                            <li class="nav-item"> <a class="nav-link " href="#about"> Sobre Nosotros</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link btn dropdown-toggle " role="btn" data-bs-toggle="dropdown"
+                                    href="#">Otros servicios </a>
+                                <ul class="dropdown-menu">
+                                    <li> <a href="#serviciosNuevos" class="dropdown-item"> Deteccion de texto
+                                            generado por
+                                            IA</a>
+                                    </li>
+                                    <li><a href="#serviciosNuevos" class="dropdown-item">Verificación de citas y
+                                            bibliografía</a>
+                                    </li>
+                                </ul>
+
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="col-4 just d-flex justify-content-end gap-4">
+
+                    <button role="button" class="d-flex align-items-center btn-theme" onclick="modoOscuro()"
+                        style="border: none; background: none; cursor: pointer; padding: 0;">
+                        <img id="theme-icon" th:src="@{img/BxsMoon.svg}" alt="Toggle theme" height="25"
+                            style="transition: transform 0.3s ease;">
+                    </button>
+
+                    <button class="btn-login">
+                        Iniciar sesión
+                    </button>
+                </div>
+
+            </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="Inicio" id="home"></section>
+    <main>
+        <div class="container-fluid cont-main d-flex flex-column">
+            <div class="main-titulo ">
+                <p class="text-center mt-5 pt-3 fs-6 fw-bold">Descubre qué tan "mareado" o copiado está tu
+                    documento.</p>
+
+                <h1 id="typing-title" class="text-center"></h1>
+
+                <p id="analisis" class="text-center ps-2 pe-2 mb-5">Soporte completo para archivos .pdf y .docx,
+                    extrayendo y
+                    verificando
+                    la
+                    autenticidad de tus textos y
+                    contrastandoloscon bases de datos internas y fuentes web en tiempo real para
+                    encontrar coincidencias exactas </p>
+            </div>
+            <div class="analisis d-flex flex-column align-items-center">
+                <div class="botones-main p-3 w-100 d-flex justify-content-between ">
+                    <div class="cont-file ps-3">
+                        <input type="file" id="archivo" class="input-hidden" accept=".pdf, .docx" />
+                        <label for="archivo" class="btn-personalizado">
+                            <span> <img src="/img/cloud-arrow-up-fill.svg" height="30"> Subir Documento</span>
+                        </label>
+                        <span class="archivo-selected"></span>
+                    </div>
+                    <button class=" btn-analizar"> <img src="/img/MdiFileCompare.svg">Realizar análisis </button>
+                </div>
+
+                <div class="textarea-contenedor ">
+                    <textarea class="textarea" id="txtAnalizar" name="textoAnalisis"
+                        placeholder=" Ingresa tu texto o carga un documento para empezar a analizarlo..."></textarea>
+                    <button onclick="borrarTexto()" class="btn-trash"><img src="/img/IconoirTrash.svg" height="28"
+                            alt=""></button>
+                </div>
+                <span class="p-2 ms-5 w-100">Máximo límite 1000 palabras por búsqueda | Total de palabras : <span
+                        id="contadortxt">0</span></span>
+            </div>
+        </div>
+    </main>
+
+    <section id="serviciosNuevos" class="servicios d-flex justify-content-center">
+        <div class="container d-flex justify-content-center">
+            <div class="col-lg-8  ">
+                <h3 class="fw-bold mb-4 mt-2 text-center">Próximamente, nuevas implementaciones</h3>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="card border-0 shadow-sm h-100 p-4 servicio-card">
+                            <div class="mb-3 d-flex gap-3">
+                                <i class="bi bi-robot fs-1 text-primary"></i>
+                                <h5 class="fw-bold mt-3">Detección de IA</h5>
+                            </div>
+                            <p class="small">
+                                Identifica textos generados por inteligencia artificial con precisión avanzada.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card border-0 shadow-sm h-100 p-4 servicio-card">
+                            <div class="mb-3 d-flex gap-3">
+                                <i class="bi bi-book fs-1 text-success"></i>
+                                <h5 class="fw-bold mt-3">Verificación Bibliográfica</h5>
+                            </div>
+                            <p class="small">
+                                Verifica la validez de citas y referencias bibliográficas automáticamente.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card border-0 shadow-sm h-100 p-4 servicio-card">
+                            <div class="mb-3 d-flex gap-3">
+                                <i class="bi bi-percent fs-1 text-warning"></i>
+                                <h5 class="fw-bold mt-3">Análisis de Originalidad</h5>
+                            </div>
+                            <p class="small">
+                                Obtén un informe detallado del porcentaje de contenido original.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card border-0 shadow-sm h-100 p-4 servicio-card">
+                            <div class="mb-3 d-flex gap-3">
+                                <i class="bi bi-shield-check fs-1 text-danger"></i>
+                                <h5 class="fw-bold mt-3">Certificación Digital</h5>
+                            </div>
+                            <p class="small">
+                                Certifica la autenticidad de tus documentos con garantía digital.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="sobre-nosotros" id="about">
+
+        <div class=" mb-4 mb-lg-0 d-flex flex-column align-items-center justify-content-center">
+            <h2 class="fw-bold mb-4 text-center">Sobre Nosotros</h2>
+
+            <p class="mb-4">
+                Somos una plataforma dedicada a garantizar la autenticidad e integridad de tus documentos
+                académicos y profesionales.
+                Nuestro objetivo es proporcionar herramientas tecnológicas avanzadas que permitan detectar
+                plagio, verificar fuentes y mantener los más altos estándares de originalidad en tu contenido.
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum voluptatem numquam autem dolores modi
+                nisi assumenda maxime, quas culpa sint eum qui eius, quis repellendus quo iusto nostrum voluptatibus
+
+            </p>
+            <p class="">
+                Contamos con un equipo de especialistas en análisis textual y tecnología de IA para ofrecerte la mejor
+                experiencia.
+
+            </p>
+            <img th:src="@{/img/teamProgr.png}" alt="" height="200" width="300" class="mt-4">
+        </div>
+
+
+    </section>
+    <footer class="foot text-light py-5">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-md-3 mb-4">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <img src="/img/duplicate .png" alt="logo" style="height: 35px;">
+                        <h5 class="mb-0 fw-bold">Drunk July</h5>
+                    </div>
+                    <p class="text-muted small">
+                        Garantiza la autenticidad de tus documentos con nuestras herramientas avanzadas de detección de
+                        plagio.
+                    </p>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <h6 class="fw-bold mb-3">Enlaces Útiles</h6>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Análisis de Plagio</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Sobre Nosotros</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Otros Servicios</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <h6 class="fw-bold mb-3">Servicios</h6>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Detección de IA</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Verificación
+                                Bibliográfica</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Análisis de
+                                Originalidad</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Certificación Digital</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <h6 class="fw-bold mb-3">Contáctanos</h6>
+                    <p class="text-muted small mb-2">
+                        <i class="bi bi-envelope"></i> info@plagiodetect.com
+                    </p>
+                    <p class="text-muted small mb-3">
+                        <i class="bi bi-telephone"></i> +51 (1) 2345-6789
+                    </p>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="btn btn-sm btn-outline-light rounded-circle" title="Facebook">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-outline-light rounded-circle" title="Twitter">
+                            <i class="bi bi-twitter"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-outline-light rounded-circle" title="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-outline-light rounded-circle" title="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="bg-secondary">
+
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="text-muted small mb-0">
+                        &copy; 2026 PlagioDetect. Todos los derechos reservados. |
+                        <a href="#" class="text-muted text-decoration-none">Política de Privacidad</a> |
+                        <a href="#" class="text-muted text-decoration-none">Términos y Condiciones</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net.js"></script>
+    <script th:src="@{/js/app.js}"></script>
+
+</body>
+
+</html>
