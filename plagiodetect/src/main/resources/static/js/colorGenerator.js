@@ -15,6 +15,7 @@ class ColorGenerator {
     observarModoOscuro() {
         const observer = new MutationObserver(() => {
             this.coloresCache.clear();
+            window.dispatchEvent(new CustomEvent('colores-fuente-actualizados'));
         });
 
         observer.observe(document.body, {
@@ -53,11 +54,11 @@ class ColorGenerator {
         let saturation, lightnessBackground, lightnessForeground;
 
         if (isDarkMode) {
-            saturation = 10;
+            saturation = 24;
             lightnessBackground = 20;
-            lightnessForeground = 50;
+            lightnessForeground = 88;
         } else {
-            saturation = 55;
+            saturation = 48;
             lightnessBackground = 90;
             lightnessForeground = 32;
         }
@@ -94,8 +95,22 @@ class ColorGenerator {
      */
     obtenerColorVibrante(indice) {
         const hue = (indice * 60) % 360;
-        const saturation = 70;
-        const lightness = 55;
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        const saturation = isDarkMode ? 42 : 42;
+        const lightness = isDarkMode ? 62 : 66;
+        return this.hslToHex(hue, saturation, lightness);
+    }
+
+    /**
+     * Obtiene un color con más presencia para bordes e iconos.
+     * @param {number} indice - Índice de la fuente
+     * @returns {string} Color hex para acentos
+     */
+    obtenerColorBorde(indice) {
+        const hue = (indice * 60) % 360;
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        const saturation = isDarkMode ? 52 : 64;
+        const lightness = isDarkMode ? 66 : 42;
         return this.hslToHex(hue, saturation, lightness);
     }
 

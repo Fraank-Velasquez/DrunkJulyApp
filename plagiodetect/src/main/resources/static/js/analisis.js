@@ -1,5 +1,7 @@
 
 /* ── Datos de ejemplo */
+let datosAnalisisActuales = null;
+
 const DATOS_EJEMPLO = {
     porcentajePlagio: 23,
     totalPalabras: 312,
@@ -45,7 +47,6 @@ Los modelos econométricos permiten proyectar escenarios de crecimiento sostenid
 La política fiscal expansiva puede estimular la demanda agregada en períodos de recesión económica, siempre que se mantenga un nivel de deuda pública sostenible a largo plazo.`
 };
 
-
 document.addEventListener('DOMContentLoaded', () => {
     // Esperar a que colorGen esté disponible
     if (typeof colorGen !== 'undefined') {
@@ -60,12 +61,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+window.addEventListener('colores-fuente-actualizados', () => {
+    if (datosAnalisisActuales) {
+        renderizarResultado(datosAnalisisActuales);
+    }
+});
+
 /**
  * Punto de entrada principal.
  * Llamar con los datos reales del backend.
  * @param {Object} datos
  */
 function renderizarResultado(datos) {
+    datosAnalisisActuales = datos;
     actualizarTarjetasResumen(datos);
     construirBarraDesglose(datos.fuentes, datos.porcentajePlagio);
     construirLeyendaColores(datos.fuentes);
@@ -245,7 +253,7 @@ function construirListaFuentes(fuentes) {
         let color, colorBorde;
         if (typeof colorGen !== 'undefined') {
             color = colorGen.obtenerColor(i);
-            colorBorde = calcularColorBorde(color.fondo);
+            colorBorde = colorGen.obtenerColorBorde(i);
         } else {
             color = { fondo: '#f0f0f0', texto: '#333333' };
             colorBorde = '#999999';
@@ -254,6 +262,7 @@ function construirListaFuentes(fuentes) {
         const tarjeta = document.createElement('div');
         tarjeta.className = 'tarjeta-fuente';
         tarjeta.dataset.indice = i;
+        tarjeta.style.setProperty('--fuente-border', colorBorde);
         tarjeta.style.borderLeftColor = colorBorde;
         tarjeta.style.animationDelay = `${i * 80}ms`;
 

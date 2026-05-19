@@ -13,6 +13,7 @@
     --clr-ink-3: #888;
     --clr-accent: #1c1c1d;
     --clr-accent-2: #ffd900c9;
+    --clr-accent-2-1: #58521fef;
     --clr-border: rgba(0, 0, 0, .09);
     --clr-border-2: rgba(0, 0, 0, .15);
     --nav-h: 60px;
@@ -250,7 +251,6 @@ header {
 }
 
 
-/* Título */
 .hero-title {
     font-family: var(--font-body);
     font-size: clamp(2.6rem, 7vw, 4.8rem);
@@ -489,10 +489,10 @@ header {
 
 .section-eyebrow {
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--clr-accent-2);
+    color: var(--clr-accent-2-1);
     margin-bottom: .75rem;
 }
 
@@ -657,7 +657,6 @@ header {
     margin-left: 2px;
 }
 
-/* Barra de palabras */
 .word-bar-wrap {
     display: flex;
     flex-direction: column;
@@ -844,7 +843,6 @@ header {
     margin-top: 4px;
 }
 
-/* Ilustración */
 .nosotros-visual {
     display: flex;
     justify-content: center;
@@ -980,7 +978,6 @@ header {
     color: rgba(255, 255, 255, .7);
 }
 
-/* dark mode */
 body.dark-mode {
     --clr-bg: #0a0a0a;
     --clr-surface: #111111;
@@ -1040,6 +1037,10 @@ body.dark-mode .hero-title-accent {
     -webkit-text-fill-color: transparent;
     background-clip: text;
 
+}
+
+body.dark-mode .section-eyebrow {
+    color: var(--clr-accent-2);
 }
 
 body.dark-mode .analisis-panel {

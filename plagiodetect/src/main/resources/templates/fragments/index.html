@@ -25,7 +25,7 @@
             <div class="container-fluid">
                 <div class="row row-head w-100">
                     <div class="col-8 d-flex ">
-                        <a href="#" class="d-flex justify-content-center gap-2 logo-nav">
+                        <a th:href="@{inicio#}" class="d-flex justify-content-center gap-2 logo-nav">
                             <div class="ps-4 d-flex gap-1 align-items-center">
                                 <img src="/img/iconodj.svg" alt="logo" height="25">
                                 <strong>DrunkJuly</strong>
@@ -33,14 +33,15 @@
                         </a>
                         <div class="menu-central">
                             <ul class="nav justify-content-center">
-                                <li class="nav-item"><a class="nav-link" href="#analisis">Análisis</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#about">Nosotros</a></li>
+                                <li class="nav-item"><a class="nav-link" th:href="@{/inicio#analisis}">Análisis</a></li>
+                                <li class="nav-item"><a class="nav-link" th:href="@{/inicio#about}">Nosotros</a></li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link btn dropdown-toggle" role="btn" data-bs-toggle="dropdown"
                                         href="#">Servicios</a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#serviciosNuevos" class="dropdown-item">Detección IA</a></li>
-                                        <li><a href="#serviciosNuevos" class="dropdown-item">Verificación
+                                        <li><a th:href="@{/inicio#serviciosNuevos}" class="dropdown-item">Detección
+                                                IA</a></li>
+                                        <li><a th:href="@{/inicio#serviciosNuevos}" class="dropdown-item">Verificación
                                                 Bibliográfica</a></li>
                                     </ul>
                                 </li>

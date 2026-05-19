@@ -19,6 +19,10 @@
     --radio-xl: 24px;
 }
 
+.contenido-dinamico {
+    border-bottom: 1px solid #58521f7a;
+}
+
 .resultado-analisis {
     font-family: var(--fnt-cuerpo);
     max-width: 1100px;
@@ -247,9 +251,6 @@
     flex-shrink: 0;
 }
 
-/* ══════════════════════════════════════════
-   LAYOUT DOS COLUMNAS
-══════════════════════════════════════════ */
 .layout-analisis {
     display: grid;
     grid-template-columns: 1fr 380px;
@@ -257,7 +258,6 @@
     align-items: start;
 }
 
-/* ── Cabecera compartida ── */
 .columna-cabecera {
     display: flex;
     justify-content: space-between;
@@ -288,7 +288,6 @@
     color: var(--clr-tinta-3);
 }
 
-/* ── Leyenda de colores (columna izquierda) ── */
 .leyenda-colores {
     display: flex;
     gap: .6rem;
@@ -309,9 +308,7 @@
     opacity: .75;
 }
 
-/* ══════════════════════════════════════════
-   COLUMNA IZQUIERDA — texto analizado
-══════════════════════════════════════════ */
+
 .columna-texto {
     background: var(--clr-superficie);
     border: 1px solid var(--clr-borde);
@@ -331,7 +328,6 @@
     scroll-behavior: smooth;
 }
 
-/* Scrollbar elegante */
 .texto-analizado::-webkit-scrollbar {
     width: 5px;
 }
@@ -345,7 +341,6 @@
     border-radius: 10px;
 }
 
-/* Highlights por fuente - Dinámicos */
 .marca-plagio {
     background: var(--fuente-bg, #fef3c7);
     color: var(--fuente-text, #92400e);
@@ -369,9 +364,6 @@
     opacity: .3;
 }
 
-/* ══════════════════════════════════════════
-   COLUMNA DERECHA — fuentes
-══════════════════════════════════════════ */
 .columna-fuentes {
     background: var(--clr-superficie);
     border: 1px solid var(--clr-borde);
@@ -401,12 +393,11 @@
     border-radius: 10px;
 }
 
-/* Tarjeta de fuente individual */
 .tarjeta-fuente {
     padding: 1.1rem 1.25rem;
     border-bottom: 1px solid var(--clr-borde);
     cursor: pointer;
-    transition: background .2s;
+    transition: background .2s, border-left-width .2s, box-shadow .2s;
     position: relative;
     border-left: 3px solid transparent;
     animation: entradaTarjeta .4s ease both;
@@ -422,6 +413,8 @@
 
 .tarjeta-fuente.activa {
     background: var(--clr-fondo);
+    border-left-width: 5px;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--fuente-border, transparent) 26%, transparent);
 }
 
 @keyframes entradaTarjeta {
@@ -522,15 +515,12 @@
     white-space: nowrap;
 }
 
-/* ══════════════════════════════════════════
-   DARK MODE
-══════════════════════════════════════════ */
 body.dark-mode {
     --clr-superficie: #111111;
     --clr-fondo: #0a0a0a;
-    --clr-tinta: #f0f0f0;
-    --clr-tinta-2: #a0a0a0;
-    --clr-tinta-3: #606060;
+    --clr-tinta: #ffffff;
+    --clr-tinta-2: #e0e0e0;
+    --clr-tinta-3: #f2f2f2;
     --clr-borde: rgba(255, 255, 255, .07);
     --clr-borde-2: rgba(255, 255, 255, .12);
 }
@@ -543,9 +533,37 @@ body.dark-mode .pista-medidor {
     stroke: #1e1e1e;
 }
 
-/* ══════════════════════════════════════════
-   RESPONSIVE
-══════════════════════════════════════════ */
+body.dark-mode .tarjeta-resumen,
+body.dark-mode .columna-texto,
+body.dark-mode .columna-fuentes {
+    background: #121212;
+}
+
+body.dark-mode .barra-desglose {
+    background: #1e1e1e;
+}
+
+body.dark-mode .segmento-barra[data-id="original"] {
+    background: #2a2a2a !important;
+}
+
+body.dark-mode .texto-analizado {
+    color: #ededed;
+}
+
+body.dark-mode .leyenda-item,
+body.dark-mode .fuente-url,
+body.dark-mode .fuente-coincidencias,
+body.dark-mode .fuentes-contador,
+body.dark-mode .tarjeta-etiqueta {
+    color: rgba(255, 255, 255, .86);
+}
+
+body.dark-mode .tarjeta-fuente:hover,
+body.dark-mode .tarjeta-fuente.activa {
+    background: #181818;
+}
+
 @media (max-width: 900px) {
     .tarjetas-resumen {
         grid-template-columns: 1fr 1fr;
