@@ -15,9 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-/* ════════════════════════════════════════
-    NAVBAR — cambia al hacer scroll
-════════════════════════════════════════ */
 function initNavbarScroll() {
     const navbar = document.getElementById('navbar');
     const onScroll = () => {
@@ -27,9 +24,6 @@ function initNavbarScroll() {
     onScroll();
 }
 
-/* ════════════════════════════════════════
-    PARTÍCULAS DE TEXTO en el canvas
-════════════════════════════════════════ */
 function initParticles() {
     const canvas = document.getElementById('particles-canvas');
     if (!canvas) return;
@@ -49,7 +43,9 @@ function initParticles() {
     const isDark = () => document.body.classList.contains('dark-mode');
 
     class Particle {
-        constructor() { this.reset(); }
+        constructor() {
+            this.reset();
+        }
         reset() {
             this.word = WORDS[Math.floor(Math.random() * WORDS.length)];
             this.x = Math.random() * W;
@@ -95,9 +91,6 @@ function initParticles() {
     loop();
 }
 
-/* ════════════════════════════════════════
-    PARALLAX — orbes a distintas velocidades
-════════════════════════════════════════ */
 function initParallax() {
     const orbs = document.querySelectorAll('[data-parallax]');
     if (!orbs.length) return;
@@ -112,9 +105,6 @@ function initParallax() {
     window.addEventListener('scroll', onScroll, { passive: true });
 }
 
-/* ════════════════════════════════════════
-    SCROLL REVEAL — fade-in sections
-════════════════════════════════════════ */
 function initScrollReveal() {
     const targets = document.querySelectorAll('.fade-section');
     if (!targets.length) return;
@@ -123,7 +113,6 @@ function initScrollReveal() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // No hace falta desconectar — las tarjetas de servicios se reaniman si vuelven
             }
         });
     }, { threshold: 0.12 });
@@ -131,9 +120,7 @@ function initScrollReveal() {
     targets.forEach(t => observer.observe(t));
 }
 
-/* ════════════════════════════════════════
-    CONTADORES ANIMADOS
-════════════════════════════════════════ */
+
 function initCounters() {
     const counters = document.querySelectorAll('.counter-anim, [data-target]');
     if (!counters.length) return;
@@ -165,9 +152,7 @@ function animateCounter(el) {
     requestAnimationFrame(step);
 }
 
-/* ════════════════════════════════════════
-    TEXTAREA + BARRA DE PALABRAS
-════════════════════════════════════════ */
+
 function initTextArea() {
     const txtArea = document.getElementById('txtAnalizar');
     const contador = document.getElementById('contadortxt');
@@ -220,7 +205,7 @@ function mostrarToast(mensaje, elementoReferencia) {
     elementoReferencia.appendChild(toast);
 
     setTimeout(() => toast.classList.add('toast-salir'), 2600);
-    setTimeout(() => toast.remove(), 3000);
+    setTimeout(() => toast.remove(), 3800);
 }
 
 function borrarTexto() {
@@ -238,9 +223,6 @@ function borrarTexto() {
     txtArea.focus();
 }
 
-/* ════════════════════════════════════════
-    ARCHIVO SUBIDO — nombre visual
-════════════════════════════════════════ */
 function initFileUpload() {
     const input = document.getElementById('archivo');
     const btnUpload = document.getElementById('btn-upload')
@@ -259,6 +241,21 @@ function initFileUpload() {
     });
 
     input.addEventListener('change', () => {
+
+        const archivo = input.files[0];
+        if (!archivo) return;
+
+
+        const tiposValidos = [
+            'application/pdf',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/msword'
+        ];
+
+        if (!tiposValidos.includes(archivo.type)) {
+            input.value = '';
+            mostrarToast("Solo se permiten cargar documentos PDF o Word", btnUpload)
+        }
 
         const nombre = input.files[0]?.name || '';
         if (spanNombre) spanNombre.textContent = nombre ? `📄 ${nombre} ` : '';
@@ -286,10 +283,6 @@ function initFileUpload() {
     });
 
 }
-
-/* ════════════════════════════════════════
-    MODO OSCURO
-════════════════════════════════════════ */
 function modoOscuro() {
     document.body.classList.toggle('dark-mode');
     const isDark = document.body.classList.contains('dark-mode');
