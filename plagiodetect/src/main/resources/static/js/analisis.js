@@ -44,7 +44,8 @@ El análisis macroeconómico evidencia una correlación directa entre las tasas 
 
 Los modelos econométricos permiten proyectar escenarios de crecimiento sostenido en contextos de estabilidad monetaria y fiscal adecuada.
 
-La política fiscal expansiva puede estimular la demanda agregada en períodos de recesión económica, siempre que se mantenga un nivel de deuda pública sostenible a largo plazo.`
+La política fiscal expansiva puede estimular la demanda agregada en períodos de recesión económica, siempre que se mantenga un nivel de deuda pública sostenible a largo plazo.
+`
 };
 
 document.addEventListener('DOMContentLoaded', () => {
